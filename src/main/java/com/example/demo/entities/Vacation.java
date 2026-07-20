@@ -23,6 +23,9 @@ public class Vacation {
     @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
     private Set<Excursion> excursionSet;
 
+    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
+    private Set<Cart_Item> cartItemSet;
+
     @Column(name="vacation_title")
     private String vacation_title;
 
