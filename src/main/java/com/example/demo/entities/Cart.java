@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,17 @@ public class Cart {
     @OneToMany(mappedBy = "cart")
     private Set<Cart_Item> cart_items;
 
+    public void add(Cart_Item cart_item) {
+        // sets relationship with new cart_item
+        if (cart_item != null) {
+            if (cart_items == null) {
+                cart_items = new HashSet<>();
+            }
+            cart_items.add(cart_item);
+            cart_item.setCart(this);
+        }
+    }
+
     @Column(name = "package_price")
     private float package_price;
 
@@ -30,9 +42,10 @@ public class Cart {
     private String orderTrackingNumber;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
 
-    private enum Status {
+    public enum Status {
         pending,
         ordered,
         canceled

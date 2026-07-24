@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="excursions")
@@ -16,6 +17,9 @@ public class Excursion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "excursion_id")
     private Long id;
+
+    @ManyToMany(mappedBy="excursions")
+    public Set<Cart_Item> cart_items;
 
     @Column(name = "create_date")
     private Date create_date;

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,17 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Cart> cartSet;
+
+    public void add(Cart cart) {
+        // sets relationship with new cart
+        if (cart != null) {
+            if (cartSet == null) {
+                cartSet = new HashSet<>();
+            }
+            cartSet.add(cart);
+            cart.setCustomer(this);
+        }
+    }
 
     @Column(name = "address")
     private String address;
