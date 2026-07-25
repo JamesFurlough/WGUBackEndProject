@@ -20,7 +20,7 @@ public class Division {
     @OneToMany(mappedBy = "division", cascade = CascadeType.ALL)
     private Set<Customer> customerSet;
 
-    @Column(name = "division")
+    @Column(name = "division", nullable = false)
     private String division_name;
 
     @ManyToOne
