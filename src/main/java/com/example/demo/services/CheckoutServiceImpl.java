@@ -27,6 +27,7 @@ public class CheckoutServiceImpl implements CheckoutService{
         Cart cart = purchase.getCart();
         Customer customer = purchase.getCustomer();
 
+
         // generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
@@ -34,9 +35,16 @@ public class CheckoutServiceImpl implements CheckoutService{
         // set cart status
         cart.setStatus(Cart.Status.ordered);
 
-        // populate cart with cart_items
-        Set<Cart_Item> cart_items = purchase.getCart_items();
-        cart_items.forEach((item -> cart.add(item)));
+        // get cart_items
+        Set<Cart_Item> cartItems = purchase.getCartItems();
+        if (cartItems != null)
+            cartItems.forEach(item -> cart.add(item));
+
+        if ((cart == null) || (cart.getCart_items() == null) || (cart.getCart_items().isEmpty()))
+        {
+            return new PurchaseResponse("ERROR! Cart cannot be Null");
+        }
+
 
         // populate customer with cart
         customer.add(cart);
@@ -45,14 +53,8 @@ public class CheckoutServiceImpl implements CheckoutService{
         cartRepository.save(cart);
 
         // return a response
-        if (cart != null) {
-            if (cart.getCart_items() != null) {
-                if (!cart.getCart_items().isEmpty()) {
-                    return new PurchaseResponse(orderTrackingNumber);
-                }
-            }
-        }
-        return new PurchaseResponse("ERROR! Cart Cannot be empty");
+        return new PurchaseResponse(orderTrackingNumber);
+
     }
 
     private String generateOrderTrackingNumber() {

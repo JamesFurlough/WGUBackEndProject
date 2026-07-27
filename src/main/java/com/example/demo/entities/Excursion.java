@@ -3,6 +3,8 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
@@ -22,6 +24,7 @@ public class Excursion {
     public Set<Cart_Item> cart_items;
 
     @Column(name = "create_date")
+    @CreationTimestamp
     private Date create_date;
 
     @Column(name = "excursion_price")
@@ -34,6 +37,7 @@ public class Excursion {
     private String image_URL;
 
     @Column(name = "last_update")
+    @UpdateTimestamp
     private Date last_update;
 
     @ManyToOne

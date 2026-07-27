@@ -21,7 +21,7 @@ public class Vacation {
     private Long id;
 
     @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
-    private Set<Excursion> excursionSet;
+    private Set<Excursion> excursions;
 
     @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL)
     private Set<Cart_Item> cartItemSet;

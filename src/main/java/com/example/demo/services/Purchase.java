@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-
 import com.example.demo.entities.Cart;
 import com.example.demo.entities.Cart_Item;
 import com.example.demo.entities.Customer;
@@ -15,5 +14,5 @@ public class Purchase {
 
     private Customer customer;
     private Cart cart;
-    private Set<Cart_Item> cart_items;
+    private Set<Cart_Item> cartItems;
 }
