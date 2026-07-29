@@ -20,7 +20,7 @@ public class Cart {
     @Column(name = "cart_id")
     private long id;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private Set<Cart_Item> cart_items;
 
     public void add(Cart_Item cart_item) {
